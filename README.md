@@ -20,6 +20,13 @@
 
 ---
 
+## ❓ Why Custom Gateway? (왜 직접 만들었는가?)
+**Q. Nginx나 Spring Cloud Gateway를 사용하지 않은 이유는?**  
+A. 연동 대상인 레거시 장비가 HTTP가 아닌 **비표준 TCP 바이너리 프로토콜(Custom Binary Packet)**을 사용해서  
+기성 솔루션으로는 해당 패킷의 헤더 파싱 및 라우팅이 불가능하여 Netty를 활용한 커스텀 코덱(Codec)을 구현해야 했습니다.
+
+---
+
 ### 📈 성능 개선 지표 (Performance Benchmarks)
 
 레거시 C# 엔진 대비 Java/Netty 마이그레이션 후 달성한 정량적 성능 수치입니다.
