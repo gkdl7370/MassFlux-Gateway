@@ -6,7 +6,7 @@
 ![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=flat&logo=docker&logoColor=white)
 ![Maven](https://img.shields.io/badge/Apache_Maven-C71A36?style=flat&logo=apache-maven&logoColor=white)
 
-**C# 레거시 엔진을 Java 17 및 Netty 기반으로 재설계하여 처리 성능을 200% 혁신한 산업용 게이트웨이**
+**C# 레거시 엔진을 Java 17 및 Netty 기반으로 재설계한 게이트웨이**
 
 ---
 
