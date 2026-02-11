@@ -9,13 +9,11 @@ import io.netty.channel.ChannelInboundHandlerAdapter;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-// ... 상단 패키지 및 임포트 생략 ...
-
 public class GatewayHandler extends ChannelInboundHandlerAdapter {
     private final ConfigManager configManager;
     private final RestApiService apiService;
 
-    // 생성자를 통해 스프링 빈(Bean)들을 전달받습니다.
+    // 생성자를 통해 스프링 빈들을 전달
     public GatewayHandler(ConfigManager configManager, RestApiService apiService) {
         this.configManager = configManager;
         this.apiService = apiService;

@@ -11,15 +11,17 @@ import org.springframework.stereotype.Component;
 import jakarta.annotation.PreDestroy;
 
 @Component
-@RequiredArgsConstructor // 생성자 주입을 자동으로 생성해줍니다.
+@RequiredArgsConstructor // final 필드에 대한 생성자를 자동 생성 - 불변성 확보
 public class NettyServer {
     private final ConfigManager configManager;
     private final RestApiService apiService;
 
+    // 역할 분리를 통한 I/O 병목 제거
     private EventLoopGroup bossGroup;
     private EventLoopGroup workerGroup;
 
     public void start(int port) {
+        // 스레드를 1개만 할당하여 불필요한 컨텍스트 스위칭 차단
         bossGroup = new NioEventLoopGroup(1);
         workerGroup = new NioEventLoopGroup();
 
@@ -30,7 +32,7 @@ public class NettyServer {
                     .childHandler(new ChannelInitializer<SocketChannel>() {
                         @Override
                         public void initChannel(SocketChannel ch) {
-                            // 주입받은 서비스들을 핸들러에 전달합니다.
+                            // 주입받은 서비스들을 핸들러에 전달
                             ch.pipeline().addLast(new GatewayHandler(configManager, apiService));
                         }
                     });
