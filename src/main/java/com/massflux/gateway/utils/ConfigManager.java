@@ -1,4 +1,4 @@
-package om.massflux.gateway.utils;
+package com.massflux.gateway.utils;
 
 import org.springframework.stereotype.Component;
 import jakarta.annotation.PostConstruct;

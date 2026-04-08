@@ -1,18 +1,21 @@
-package om.massflux.gateway.core;
+package com.massflux.gateway.core;
 
-import om.massflux.gateway.utils.ConfigManager;
+import com.massflux.gateway.utils.ConfigManager;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import jakarta.annotation.PreDestroy;
 
+@Slf4j
 @Component
-@RequiredArgsConstructor // final 필드에 대한 생성자를 자동 생성 - 불변성 확보
+@RequiredArgsConstructor
 public class NettyServer {
+
     private final ConfigManager configManager;
     private final RestApiService apiService;
 
@@ -32,20 +35,28 @@ public class NettyServer {
                     .childHandler(new ChannelInitializer<SocketChannel>() {
                         @Override
                         public void initChannel(SocketChannel ch) {
-                            // 주입받은 서비스들을 핸들러에 전달
                             ch.pipeline().addLast(new GatewayHandler(configManager, apiService));
                         }
                     });
 
             ChannelFuture f = b.bind(port).sync();
-            System.out.println(">>> MassFlux Gateway is ready on port " + port);
+            log.info("MassFlux Gateway started on port {}", port);
+
+            // 채널이 닫힐 때까지 블로킹 — 이 줄이 없으면 start() 즉시 반환되어 서버가 종료됨
+            f.channel().closeFuture().sync();
+
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+            log.error("Gateway 시작 중 인터럽트 발생", e);
         } catch (Exception e) {
+            log.error("Gateway 시작 실패", e);
             stop();
         }
     }
 
     @PreDestroy
     public void stop() {
+        log.info("MassFlux Gateway 종료 중...");
         if (bossGroup != null) bossGroup.shutdownGracefully();
         if (workerGroup != null) workerGroup.shutdownGracefully();
     }

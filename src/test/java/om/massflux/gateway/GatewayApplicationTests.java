@@ -1,4 +1,4 @@
-package om.massflux.gateway;
+package com.massflux.gateway;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

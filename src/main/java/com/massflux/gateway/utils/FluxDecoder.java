@@ -1,4 +1,4 @@
-package om.massflux.gateway.utils;
+package com.massflux.gateway.utils;
 
 import io.netty.buffer.ByteBuf;
 import java.nio.charset.StandardCharsets;

@@ -1,8 +1,8 @@
-package om.massflux.gateway.core;
+package com.massflux.gateway.core;
 
-import om.massflux.gateway.model.SensorPacket;
-import om.massflux.gateway.utils.ConfigManager;
-import om.massflux.gateway.utils.FluxDecoder;
+import com.massflux.gateway.model.SensorPacket;
+import com.massflux.gateway.utils.ConfigManager;
+import com.massflux.gateway.utils.FluxDecoder;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
@@ -32,6 +32,7 @@ public class GatewayHandler extends ChannelInboundHandlerAdapter {
                         .siteCode(siteCode)
                         .valueX(FluxDecoder.readFloatLE(in, 24))
                         .valueY(FluxDecoder.readFloatLE(in, 28))
+                        .valueZ(FluxDecoder.readFloatLE(in, 32))    // Z축 오프셋 추가
                         .timestamp(java.time.LocalDateTime.now().toString())
                         .build();
 

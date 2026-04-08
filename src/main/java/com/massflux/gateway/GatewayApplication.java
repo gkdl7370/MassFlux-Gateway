@@ -1,6 +1,6 @@
-package om.massflux.gateway;
+package com.massflux.gateway;
 
-import om.massflux.gateway.core.NettyServer;
+import com.massflux.gateway.core.NettyServer;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -13,11 +13,10 @@ public class GatewayApplication {
 		SpringApplication.run(GatewayApplication.class, args);
 	}
 
-	// Spring Boot가 실행 완료된 직후 이 메서드가 호출됩니다.
 	@Bean
 	public CommandLineRunner runner(NettyServer nettyServer) {
 		return args -> {
-			// Netty 서버를 8003 포트로 시작합니다.
+			// Netty 서버를 8003 포트로 시작
 			nettyServer.start(8003);
 		};
 	}
