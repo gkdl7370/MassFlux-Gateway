@@ -91,7 +91,7 @@ docker build -t massflux-gateway .
 docker run -d \
   -p 8003:8003 \
   -p 8080:8080 \
-  -e API_SERVER_URL=http://your-api-server.com \
+  -e API_SERVER_URL=http://api-server.com \
   --name massflux-gateway \
   massflux-gateway
 ```
@@ -104,5 +104,5 @@ docker run -d \
 
 ```properties
 gateway.port=8003
-api.server.url=http://your-api-server.com
+api.server.url=http://api-server.com
 ```
