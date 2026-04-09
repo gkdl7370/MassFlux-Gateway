@@ -12,8 +12,8 @@ public class SensorPacket {
 
     private float valueX;       // 센서 X축 측정값
     private float valueY;       // 센서 Y축 측정값
-    private float valueZ;       // 센서 Z축 측정값 (미사용 시 기본값 0.0)
+    private float valueZ;       // 센서 Z축 측정값
 
-    private int battery;        // 배터리 잔량 (미사용 시 기본값 0)
+    private int battery;        // 배터리 잔량 (현재 프로토콜 미포함, 기본값 0)
     private String timestamp;   // 수신 시각 (ISO-8601)
 }
