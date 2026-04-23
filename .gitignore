@@ -17,4 +17,4 @@ out/
 Thumbs.db
 
 # 설정 파일 (보안상 제외)
-device-inventory.csv
+#device-inventory.csv
