@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: massflux-gateway
+  labels:
+    app: massflux-gateway
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: massflux-gateway
+  template:
+    metadata:
+      labels:
+        app: massflux-gateway
+    spec:
+      containers:
+        - name: massflux-gateway
+          image: massflux-gateway:latest
+          imagePullPolicy: Never        # 로컬 이미지 사용
+          ports:
+            - containerPort: 8003       # Netty TCP
+            - containerPort: 8080       # REST API
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "250m"
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
