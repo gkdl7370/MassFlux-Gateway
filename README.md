@@ -227,3 +227,14 @@ api.server.url=http://api-server.com
 management.endpoints.web.exposure.include=health,info,metrics
 management.endpoint.health.show-details=always
 ```
+
+---
+
+## 최근 정리한 부분
+
+Netty 기반 게이트웨이의 핵심 동작을 테스트로 확인할 수 있도록 보강했습니다.
+
+- `FluxDecoderTest`를 추가해 장비 ID 추출과 little-endian float 디코딩을 검증했습니다.
+- `GatewayHandlerTest`를 추가해 정상 패킷 처리와 잘못된 패킷 무시 동작을 검증했습니다.
+- CI에서 테스트를 건너뛰지 않도록 `mvn clean verify`로 변경했습니다.
+- 앞으로 더 확인할 내용은 [게이트웨이 검증 노트](docs/verification.md)에 정리했습니다.
