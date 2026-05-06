@@ -10,25 +10,25 @@ jobs:
     runs-on: ubuntu-latest # GitHub이 제공하는 최신 리눅스 서버 대여
 
     steps:
-    - name: 1. 최신 소스 코드 가져오기 (Checkout)
+    - name: 1. 최신 소스 코드 가져오기
       uses: actions/checkout@v3
 
-    - name: 2. Java 17 환경 세팅
+    - name: 2. Java 17 환경 설정
       uses: actions/setup-java@v3
       with:
         java-version: '17'
         distribution: 'temurin'
 
-    - name: 3. Maven으로 애플리케이션 빌드 (jar 파일 생성)
-      run: mvn clean package -DskipTests
+    - name: 3. Maven 테스트 및 애플리케이션 빌드
+      run: mvn clean verify
 
-    - name: 4. Docker Hub 로그인 (등록한 Secret 사용)
+    - name: 4. Docker Hub 로그인
       uses: docker/login-action@v2
       with:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-    - name: 5. 도커 이미지 빌드 및 Docker Hub로 Push (자산 업로드)
+    - name: 5. Docker 이미지 빌드 및 Push
       uses: docker/build-push-action@v4
       with:
         context: .
